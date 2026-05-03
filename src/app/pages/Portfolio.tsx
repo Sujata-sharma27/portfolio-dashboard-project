@@ -5,7 +5,7 @@ import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { Modal } from "../components/ui/Modal";
 import { Input } from "../components/ui/Input";
-import { useApp } from "../context/AppContext";
+import { useApp } from "../context/useApp";
 
 const projects = [
   {

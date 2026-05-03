@@ -1,52 +1,106 @@
 import { useState } from "react";
-import { BookOpen, Clock, CheckCircle2, TrendingUp, Play, Plus, Award, Target } from "lucide-react";
+import {
+  BookOpen,
+  Clock,
+  CheckCircle2,
+  TrendingUp,
+  Play,
+  Plus,
+  Award,
+  Target,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { Modal } from "../components/ui/Modal";
 import { Input } from "../components/ui/Input";
-import { useApp } from "../context/AppContext";
+import { useApp } from "../context/useApp";
 
 const skills = [
-  { name: "React & TypeScript", progress: 85, hours: 120, level: "Advanced", color: "from-blue-500 to-blue-600", bgColor: "bg-blue-50" },
-  { name: "Node.js & Express", progress: 72, hours: 95, level: "Intermediate", color: "from-green-500 to-green-600", bgColor: "bg-green-50" },
-  { name: "System Design", progress: 60, hours: 78, level: "Intermediate", color: "from-purple-500 to-purple-600", bgColor: "bg-purple-50" },
-  { name: "Docker & Kubernetes", progress: 55, hours: 65, level: "Intermediate", color: "from-cyan-500 to-cyan-600", bgColor: "bg-cyan-50" },
-  { name: "GraphQL", progress: 48, hours: 52, level: "Beginner", color: "from-pink-500 to-pink-600", bgColor: "bg-pink-50" },
-  { name: "AWS Services", progress: 42, hours: 45, level: "Beginner", color: "from-orange-500 to-orange-600", bgColor: "bg-orange-50" },
+  {
+    name: "React & TypeScript",
+    progress: 80,
+    hours: 100,
+    level: "Advanced",
+    color: "from-blue-500 to-blue-600",
+    bgColor: "bg-blue-50",
+  },
+  {
+    name: "Node.js & Express",
+    progress: 70,
+    hours: 85,
+    level: "Intermediate",
+    color: "from-green-500 to-green-600",
+    bgColor: "bg-green-50",
+  },
+  {
+    name: "MongoDB",
+    progress: 75,
+    hours: 90,
+    level: "Intermediate",
+    color: "from-emerald-500 to-emerald-600",
+    bgColor: "bg-emerald-50",
+  },
+  {
+    name: "Data Structures & Algorithms",
+    progress: 65,
+    hours: 120,
+    level: "Intermediate",
+    color: "from-purple-500 to-purple-600",
+    bgColor: "bg-purple-50",
+  },
+  {
+    name: "Machine Learning",
+    progress: 55,
+    hours: 70,
+    level: "Intermediate",
+    color: "from-pink-500 to-pink-600",
+    bgColor: "bg-pink-50",
+  },
+  {
+    name: "SQL & Database Management",
+    progress: 60,
+    hours: 80,
+    level: "Intermediate",
+    color: "from-yellow-500 to-yellow-600",
+    bgColor: "bg-yellow-50",
+  },
 ];
 
 const courses = [
   {
     id: 1,
-    title: "Advanced React Patterns & Performance",
-    platform: "Frontend Masters",
-    instructor: "Kent C. Dodds",
-    progress: 65,
-    totalLessons: 42,
-    completedLessons: 27,
-    thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop"
+    title: "Complete MERN Stack Development",
+    platform: "Udemy",
+    instructor: "Academind",
+    progress: 75,
+    totalLessons: 120,
+    completedLessons: 90,
+    thumbnail:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop",
   },
   {
     id: 2,
-    title: "Microservices Architecture",
-    platform: "Udemy",
-    instructor: "Stephen Grider",
-    progress: 38,
-    totalLessons: 156,
-    completedLessons: 59,
-    thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop"
+    title: "Data Structures & Algorithms Mastery",
+    platform: "GeeksforGeeks",
+    instructor: "GFG Team",
+    progress: 60,
+    totalLessons: 200,
+    completedLessons: 120,
+    thumbnail:
+      "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=300&fit=crop",
   },
   {
     id: 3,
-    title: "System Design Interview Prep",
+    title: "Machine Learning by Andrew Ng",
     platform: "Coursera",
-    instructor: "Google Engineers",
-    progress: 82,
-    totalLessons: 32,
-    completedLessons: 26,
-    thumbnail: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=300&fit=crop"
-  }
+    instructor: "Andrew Ng",
+    progress: 50,
+    totalLessons: 80,
+    completedLessons: 40,
+    thumbnail:
+      "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop",
+  },
 ];
 
 export function Learning() {
@@ -55,14 +109,29 @@ export function Learning() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const stats = [
-    { label: "Active Courses", value: "12", icon: BookOpen, color: "from-blue-500 to-blue-600" },
-    { label: "Completed", value: "34", icon: CheckCircle2, color: "from-green-500 to-green-600" },
-    { label: "Total Hours", value: "455h", icon: Clock, color: "from-purple-500 to-purple-600" },
+    {
+      label: "Active Courses",
+      value: "6",
+      icon: BookOpen,
+      color: "from-blue-500 to-blue-600",
+    },
+    {
+      label: "Completed",
+      value: "12",
+      icon: CheckCircle2,
+      color: "from-green-500 to-green-600",
+    },
+    {
+      label: "Total Hours",
+      value: "320h",
+      icon: Clock,
+      color: "from-purple-500 to-purple-600",
+    },
   ];
 
   const handleAddCourse = () => {
     setIsModalOpen(false);
-    showToast('Course added successfully!', 'success');
+    showToast("Course added successfully!", "success");
   };
 
   return (
@@ -73,8 +142,12 @@ export function Learning() {
         className="flex items-center justify-between mb-8"
       >
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Learning Journey</h1>
-          <p className="text-gray-600">Track your skill development and courses</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            Learning Journey
+          </h1>
+          <p className="text-gray-600">
+            Track your skill development and courses
+          </p>
         </div>
         <Button onClick={() => setIsModalOpen(true)}>
           <Plus className="w-5 h-5" />
@@ -94,11 +167,15 @@ export function Learning() {
             >
               <Card hover>
                 <div className="flex items-center gap-4">
-                  <div className={`p-4 bg-gradient-to-br ${stat.color} rounded-xl shadow-lg`}>
+                  <div
+                    className={`p-4 bg-gradient-to-br ${stat.color} rounded-xl shadow-lg`}
+                  >
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold text-gray-900">{stat.value}</h3>
+                    <h3 className="text-3xl font-bold text-gray-900">
+                      {stat.value}
+                    </h3>
                     <p className="text-gray-600 text-sm">{stat.label}</p>
                   </div>
                 </div>
@@ -152,7 +229,9 @@ export function Learning() {
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <h3 className="font-bold text-gray-900 text-lg">{skill.name}</h3>
+                        <h3 className="font-bold text-gray-900 text-lg">
+                          {skill.name}
+                        </h3>
                         <span className="px-3 py-1 bg-white text-gray-700 rounded-full text-xs font-semibold border border-gray-300">
                           {skill.level}
                         </span>
@@ -162,7 +241,9 @@ export function Learning() {
                           <Clock className="w-4 h-4" />
                           <span className="font-semibold">{skill.hours}h</span>
                         </div>
-                        <span className="text-xl font-bold text-gray-900">{skill.progress}%</span>
+                        <span className="text-xl font-bold text-gray-900">
+                          {skill.progress}%
+                        </span>
                       </div>
                     </div>
                     <div className="relative h-3 bg-white rounded-full overflow-hidden border border-gray-200">
@@ -224,14 +305,22 @@ export function Learning() {
 
                       <div className="space-y-2">
                         <div className="flex items-center justify-between text-sm text-gray-600">
-                          <span>{course.completedLessons}/{course.totalLessons} lessons</span>
-                          <span className="font-bold text-blue-600">{course.progress}%</span>
+                          <span>
+                            {course.completedLessons}/{course.totalLessons}{" "}
+                            lessons
+                          </span>
+                          <span className="font-bold text-blue-600">
+                            {course.progress}%
+                          </span>
                         </div>
                         <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${course.progress}%` }}
-                            transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
+                            transition={{
+                              duration: 1,
+                              delay: 0.5 + index * 0.1,
+                            }}
                             className="h-full bg-gradient-to-r from-blue-600 to-purple-600"
                           />
                         </div>
@@ -249,7 +338,11 @@ export function Learning() {
         </Card>
       </motion.div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Add New Course">
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Add New Course"
+      >
         <div className="space-y-4">
           <Input label="Course Title" placeholder="Enter course name" />
           <Input label="Platform" placeholder="Udemy, Coursera, etc." />
@@ -257,8 +350,16 @@ export function Learning() {
           <Input label="Total Lessons" type="number" placeholder="42" />
           <Input label="Course URL" placeholder="https://..." />
           <div className="flex gap-3 pt-4">
-            <Button onClick={handleAddCourse} className="flex-1">Add Course</Button>
-            <Button variant="outline" onClick={() => setIsModalOpen(false)} className="flex-1">Cancel</Button>
+            <Button onClick={handleAddCourse} className="flex-1">
+              Add Course
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => setIsModalOpen(false)}
+              className="flex-1"
+            >
+              Cancel
+            </Button>
           </div>
         </div>
       </Modal>

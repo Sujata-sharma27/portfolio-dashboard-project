@@ -4,10 +4,11 @@ import { motion } from "motion/react";
 import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
-import { useApp } from "../context/AppContext";
+import { AvatarUpload } from "../components/ui/AvatarUpload";
+import { useApp } from "../context/useApp";
 
 export function Settings() {
-  const { user, theme, toggleTheme, showToast } = useApp();
+  const { user, updateAvatar, theme, toggleTheme, showToast } = useApp();
   const [activeTab, setActiveTab] = useState<'profile' | 'notifications' | 'privacy' | 'appearance'>('profile');
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [pushNotifications, setPushNotifications] = useState(true);
@@ -22,6 +23,16 @@ export function Settings() {
 
   const handleSaveSettings = () => {
     showToast('Settings saved successfully!', 'success');
+  };
+
+  const handleAvatarUpload = (imageData: string) => {
+    updateAvatar(imageData);
+    showToast('Profile picture updated!', 'success');
+  };
+
+  const handleAvatarRemove = () => {
+    updateAvatar('');
+    showToast('Profile picture removed', 'info');
   };
 
   return (
@@ -79,12 +90,18 @@ export function Settings() {
                 </div>
 
                 <div className="flex items-center gap-6">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-3xl text-white font-bold">
-                    {user?.name.charAt(0)}
-                  </div>
+                  <AvatarUpload
+                    currentAvatar={user?.avatar}
+                    name={user?.name || 'User'}
+                    size="lg"
+                    onUpload={handleAvatarUpload}
+                    onRemove={handleAvatarRemove}
+                    showRemove={!!user?.avatar}
+                  />
                   <div>
-                    <Button size="sm" variant="outline">Change Avatar</Button>
-                    <p className="text-sm text-gray-500 mt-2">JPG, GIF or PNG. Max size of 2MB</p>
+                    <p className="text-sm font-medium text-gray-900 mb-1">Profile Picture</p>
+                    <p className="text-sm text-gray-500">JPG, GIF or PNG. Max size of 5MB</p>
+                    <p className="text-xs text-gray-400 mt-2">Click on avatar to upload</p>
                   </div>
                 </div>
 

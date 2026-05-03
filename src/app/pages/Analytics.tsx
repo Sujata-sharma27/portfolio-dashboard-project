@@ -1,51 +1,97 @@
 import { useState } from "react";
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { TrendingUp, Award, Target, Zap, Calendar, Filter, Download } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import {
+  TrendingUp,
+  Award,
+  Target,
+  Zap,
+  Calendar,
+  Filter,
+  Download,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
-import { useApp } from "../context/AppContext";
+import { useApp } from "../context/useApp";
 
 const weeklyData = [
-  { day: "Mon", hours: 5, projects: 2 },
-  { day: "Tue", hours: 6, projects: 3 },
-  { day: "Wed", hours: 4, projects: 2 },
-  { day: "Thu", hours: 7, projects: 4 },
-  { day: "Fri", hours: 5, projects: 3 },
-  { day: "Sat", hours: 3, projects: 1 },
+  { day: "Mon", hours: 4, projects: 1 },
+  { day: "Tue", hours: 5, projects: 2 },
+  { day: "Wed", hours: 3, projects: 1 },
+  { day: "Thu", hours: 6, projects: 2 },
+  { day: "Fri", hours: 4, projects: 2 },
+  { day: "Sat", hours: 2, projects: 1 },
   { day: "Sun", hours: 2, projects: 1 },
 ];
 
 const skillDistribution = [
-  { name: "Frontend", value: 35, color: "#3b82f6" },
+  { name: "Frontend", value: 30, color: "#3b82f6" },
   { name: "Backend", value: 25, color: "#8b5cf6" },
-  { name: "DevOps", value: 20, color: "#10b981" },
-  { name: "Design", value: 12, color: "#f59e0b" },
-  { name: "Testing", value: 8, color: "#ec4899" },
+  { name: "Database", value: 15, color: "#10b981" },
+  { name: "DSA", value: 15, color: "#f59e0b" },
+  { name: "Machine Learning", value: 15, color: "#ec4899" },
 ];
-
 const monthlyProgress = [
-  { month: "Dec", completed: 12, started: 18 },
-  { month: "Jan", completed: 15, started: 20 },
-  { month: "Feb", completed: 18, started: 22 },
-  { month: "Mar", completed: 22, started: 24 },
-  { month: "Apr", completed: 20, started: 25 },
-  { month: "May", completed: 25, started: 28 },
+  { month: "Dec", completed: 5, started: 8 },
+  { month: "Jan", completed: 8, started: 10 },
+  { month: "Feb", completed: 10, started: 12 },
+  { month: "Mar", completed: 12, started: 15 },
+  { month: "Apr", completed: 14, started: 16 },
+  { month: "May", completed: 16, started: 18 },
 ];
 
 export function Analytics() {
   const { showToast } = useApp();
-  const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'year'>('week');
-
+  const [selectedPeriod, setSelectedPeriod] = useState<
+    "week" | "month" | "year"
+  >("week");
   const stats = [
-    { label: "This Week", value: "32h", change: "+18%", icon: TrendingUp, color: "from-blue-500 to-blue-600" },
-    { label: "Achievements", value: "47", change: "+5", icon: Award, color: "from-purple-500 to-purple-600" },
-    { label: "Goal Progress", value: "80%", change: "8/10", icon: Target, color: "from-green-500 to-green-600" },
-    { label: "Day Streak", value: "12", change: "Top 5%", icon: Zap, color: "from-orange-500 to-orange-600" },
+    {
+      label: "This Week",
+      value: "26h",
+      change: "+12%",
+      icon: TrendingUp,
+      color: "from-blue-500 to-blue-600",
+    },
+    {
+      label: "Achievements",
+      value: "15",
+      change: "+3",
+      icon: Award,
+      color: "from-purple-500 to-purple-600",
+    },
+    {
+      label: "Goal Progress",
+      value: "70%",
+      change: "7/10",
+      icon: Target,
+      color: "from-green-500 to-green-600",
+    },
+    {
+      label: "Day Streak",
+      value: "8",
+      change: "Improving",
+      icon: Zap,
+      color: "from-orange-500 to-orange-600",
+    },
   ];
 
   const handleExport = () => {
-    showToast('Analytics report exported!', 'success');
+    showToast("Analytics report exported!", "success");
   };
 
   return (
@@ -56,8 +102,12 @@ export function Analytics() {
         className="flex items-center justify-between mb-8"
       >
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Analytics & Insights</h1>
-          <p className="text-gray-600">Track your productivity and growth patterns</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            Analytics & Insights
+          </h1>
+          <p className="text-gray-600">
+            Track your productivity and growth patterns
+          </p>
         </div>
         <div className="flex gap-3">
           <Button variant="outline" size="sm">
@@ -81,7 +131,10 @@ export function Analytics() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className={`bg-gradient-to-br ${stat.color} text-white border-none hover:shadow-2xl`} hover>
+              <Card
+                className={`bg-gradient-to-br ${stat.color} text-white border-none hover:shadow-2xl`}
+                hover
+              >
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl">
                     <Icon className="w-6 h-6" />
@@ -107,16 +160,18 @@ export function Analytics() {
         >
           <Card>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-gray-900">Weekly Activity</h2>
+              <h2 className="text-xl font-bold text-gray-900">
+                Weekly Activity
+              </h2>
               <div className="flex gap-2">
-                {(['week', 'month', 'year'] as const).map((period) => (
+                {(["week", "month", "year"] as const).map((period) => (
                   <button
                     key={period}
                     onClick={() => setSelectedPeriod(period)}
                     className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
                       selectedPeriod === period
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                     }`}
                   >
                     {period.charAt(0).toUpperCase() + period.slice(1)}
@@ -131,15 +186,25 @@ export function Analytics() {
                 <YAxis stroke="#9ca3af" />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: 'white',
-                    border: 'none',
-                    borderRadius: '12px',
-                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                    backgroundColor: "white",
+                    border: "none",
+                    borderRadius: "12px",
+                    boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                   }}
                 />
                 <Legend />
-                <Bar dataKey="hours" fill="#3b82f6" radius={[8, 8, 0, 0]} animationDuration={1500} />
-                <Bar dataKey="projects" fill="#8b5cf6" radius={[8, 8, 0, 0]} animationDuration={1500} />
+                <Bar
+                  dataKey="hours"
+                  fill="#3b82f6"
+                  radius={[8, 8, 0, 0]}
+                  animationDuration={1500}
+                />
+                <Bar
+                  dataKey="projects"
+                  fill="#8b5cf6"
+                  radius={[8, 8, 0, 0]}
+                  animationDuration={1500}
+                />
               </BarChart>
             </ResponsiveContainer>
           </Card>
@@ -151,7 +216,9 @@ export function Analytics() {
           transition={{ delay: 0.5 }}
         >
           <Card>
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Skill Distribution</h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-6">
+              Skill Distribution
+            </h2>
             <ResponsiveContainer width="100%" height={240}>
               <PieChart id="analytics-pie-chart">
                 <Pie
@@ -170,10 +237,10 @@ export function Analytics() {
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: 'white',
-                    border: 'none',
-                    borderRadius: '12px',
-                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                    backgroundColor: "white",
+                    border: "none",
+                    borderRadius: "12px",
+                    boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                   }}
                 />
               </PieChart>
@@ -192,9 +259,13 @@ export function Analytics() {
                       className="w-4 h-4 rounded-full shadow-sm"
                       style={{ backgroundColor: skill.color }}
                     />
-                    <span className="text-gray-700 font-medium">{skill.name}</span>
+                    <span className="text-gray-700 font-medium">
+                      {skill.name}
+                    </span>
                   </div>
-                  <span className="font-bold text-gray-900">{skill.value}%</span>
+                  <span className="font-bold text-gray-900">
+                    {skill.value}%
+                  </span>
                 </motion.div>
               ))}
             </div>
@@ -211,7 +282,9 @@ export function Analytics() {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <Calendar className="w-6 h-6 text-blue-600" />
-              <h2 className="text-xl font-bold text-gray-900">Project Completion Trends</h2>
+              <h2 className="text-xl font-bold text-gray-900">
+                Project Completion Trends
+              </h2>
             </div>
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2">
@@ -231,10 +304,10 @@ export function Analytics() {
               <YAxis stroke="#9ca3af" />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: 'white',
-                  border: 'none',
-                  borderRadius: '12px',
-                  boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                  backgroundColor: "white",
+                  border: "none",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                 }}
               />
               <Legend />
@@ -243,7 +316,7 @@ export function Analytics() {
                 dataKey="completed"
                 stroke="#10b981"
                 strokeWidth={3}
-                dot={{ r: 6, fill: '#10b981' }}
+                dot={{ r: 6, fill: "#10b981" }}
                 animationDuration={1500}
               />
               <Line
@@ -251,7 +324,7 @@ export function Analytics() {
                 dataKey="started"
                 stroke="#3b82f6"
                 strokeWidth={3}
-                dot={{ r: 6, fill: '#3b82f6' }}
+                dot={{ r: 6, fill: "#3b82f6" }}
                 animationDuration={1500}
               />
             </LineChart>

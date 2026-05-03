@@ -2,7 +2,7 @@ import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { LayoutDashboard, Briefcase, GraduationCap, BarChart3, User, LogOut, Settings, Bell, Search } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { useApp } from "../context/AppContext";
+import { useApp } from "../context/useApp";
 
 export function RootLayout() {
   const location = useLocation();
@@ -121,9 +121,17 @@ export function RootLayout() {
                   whileHover={{ scale: 1.05 }}
                   className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 rounded-xl transition-colors cursor-pointer"
                 >
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
-                    {user?.name.charAt(0)}
-                  </div>
+                  {user?.avatar ? (
+                    <img
+                      src={user.avatar}
+                      alt={user.name}
+                      className="w-10 h-10 rounded-full object-cover border-2 border-gray-200"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
+                      {user?.name.charAt(0)}
+                    </div>
+                  )}
                   <div className="text-left hidden md:block">
                     <div className="text-sm font-semibold text-gray-900">{user?.name}</div>
                     <div className="text-xs text-gray-500">View Profile</div>
