@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Mail,
   MapPin,
@@ -22,6 +22,7 @@ import { useApp } from "../context/useApp";
 export function Profile() {
   const { showToast } = useApp();
   const [isEditing, setIsEditing] = useState(false);
+
   const [profile, setProfile] = useState({
     name: "Sujata Sharma",
     title: "Full Stack Developer | AI-ML Enthusiast",
@@ -33,7 +34,24 @@ export function Profile() {
     linkedin: "https://www.linkedin.com/in/sujata-sharma-13320a2b3/",
     website: "",
   });
+
   const [avatar, setAvatar] = useState<string>("");
+
+  // ✅ COVER FEATURE ADDED
+  const [coverImage, setCoverImage] = useState<string>("");
+  const coverInputRef = useRef<HTMLInputElement>(null);
+
+  const handleCoverUpload = (e: any) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setCoverImage(reader.result as string);
+      showToast("Cover updated!", "success");
+    };
+    reader.readAsDataURL(file);
+  };
 
   const updateAvatar = (imageData: string) => {
     setAvatar(imageData);
@@ -109,8 +127,16 @@ export function Profile() {
           animate={{ opacity: 1, y: 0 }}
         >
           <Card className="overflow-hidden mb-6">
-            <div className="h-48 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 relative">
+            {/* ✅ ONLY THIS PART UPDATED */}
+            <div className="h-48 relative overflow-hidden">
+              {coverImage ? (
+                <img src={coverImage} className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+              )}
+
               <motion.button
+                onClick={() => coverInputRef.current?.click()}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="absolute bottom-4 right-4 px-4 py-2 bg-white text-gray-900 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
@@ -118,6 +144,14 @@ export function Profile() {
                 <Camera className="w-4 h-4" />
                 Change Cover
               </motion.button>
+
+              <input
+                ref={coverInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleCoverUpload}
+                hidden
+              />
             </div>
 
             <div className="px-8 pb-8">
@@ -329,7 +363,3 @@ export function Profile() {
     </div>
   );
 }
-function updateAvatar(imageData: string) {
-  throw new Error("Function not implemented.");
-}
-

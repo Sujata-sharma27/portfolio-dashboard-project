@@ -139,7 +139,7 @@ export function Analytics() {
                   <div className="p-3 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <span className="text-sm font-semibold px-3 py-1 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg">
+                  <span className="text-sm font-semibold px-3 py-1 bg-white text-black rounded-lg">
                     {stat.change}
                   </span>
                 </div>
