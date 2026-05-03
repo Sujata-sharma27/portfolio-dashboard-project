@@ -124,11 +124,11 @@ export function Profile() {
                 </div>
 
                 <div className="flex gap-3">
-                  <Button onClick={() => window.open(`https://${profile.github}`, '_blank')}>
+                  <Button onClick={() => window.open(`https://github.com/Sujata-sharma27}`, '_blank')}>
                     <Github className="w-5 h-5" />
                     GitHub
                   </Button>
-                  <Button variant="outline" onClick={() => window.open(`https://${profile.linkedin}`, '_blank')}>
+                  <Button variant="outline" onClick={() => window.open(`https://www.linkedin.com/in/sujata-sharma-13320a2b3/}`, '_blank')}>
                     <Linkedin className="w-5 h-5" />
                     LinkedIn
                   </Button>
